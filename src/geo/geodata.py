@@ -2,7 +2,6 @@
 
 import os
 import geopandas
-import matplotlib.pyplot as plt
 
 VERSION = '2021-05-07'
 
@@ -18,5 +17,4 @@ def get_all_geodata(sub_region_type):
 def get_region_geodata(region_id, sub_region_type):
     """Get geo data for region."""
     geodata = get_all_geodata(sub_region_type)
-    n = len(region_id)
-    return geodata[geodata['id'].str.slice(stop=n) == region_id]
+    return geodata[geodata['id'].str.slice(stop=len(region_id)) == region_id]
