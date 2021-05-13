@@ -1,130 +1,119 @@
-"""Geo utils."""
+"""Module *plot* various utils for plotting maps of Sri Lanka.
 
-import os
-import geopandas
+To plot a basic outline map of Sri Lanka with province boundaries,
+
+.. code-block:: python
+
+    >> from geo import geodata
+    >> from geo import plot
+    >> geodata = geodata.get_region_geodata('LK', 'province')
+    >> plot.plot_geodata(geodata)
+
+Similarly, to plot Colombo District with DSD boundaries,
+
+.. code-block:: python
+
+    >> geodata = geodata.get_region_geodata('LK-11', 'dsd')
+    >> plot.plot_geodata(geodata)
+
+To add a title, subtitle and footer text to the figure,s
+
+.. code-block:: python
+
+    >> plot.plot_geodata(
+        geodata,
+        title='Colombo District',
+        sub_title='DSD Boundaries',
+        footer_text='Data Source: http://www.statistics.gov.lk/',
+        label_field_key='id',
+    )
+
+
+
+
+"""
+
 import matplotlib.pyplot as plt
-
-VERSION = '2021-05-07'
-
-
-def get_all_geodata(sub_region_type):
-    """Get geo data for entire country."""
-    return geopandas.read_file(os.path.join(
-        '/Users/nuwan.senaratna/Not.Dropbox/DEV/GITHUB_MIRROR/sl-topojson',
-        '%s.%s.json' % (sub_region_type, VERSION),
-    ))
-
-
-def get_region_geodata(region_id, sub_region_type):
-    """Get geo data for region."""
-    geodata = get_all_geodata(sub_region_type)
-    n = len(region_id)
-    return geodata[geodata['id'].str.slice(stop=n) == region_id]
+BASE_FONT_SIZE = 16
 
 
 def plot_geodata(
     geodata,
-    title,
-    sub_title,
-    footer_text,
-    region_to_color_map,
+    title='',
+    sub_title='',
+    footer_text='',
+    label_field_key=None,
+    region_to_color_map=None,
+    func_draw_on_figure=None,
+    func_render_region=None,
 ):
     """Plot region_id."""
     plt.rc('font', family='Futura')
 
-    fig, ax = plt.subplots()
+    fig, axis = plt.subplots()
+
+    color = None
+    if region_to_color_map:
+        color = geodata['id'].map(region_to_color_map)
+
     geodata.plot(
-        ax=ax,
-        label='name',
-        color=geodata['id'].map(region_to_color_map),
+        ax=axis,
+        color=color,
     )
 
     # sub-region labels
-    n = len(geodata)
-    if n < 30:
-        geodata['center'] = geodata['geometry'].centroid
-        geodata_copy = geodata.copy()
-        geodata_copy.set_geometry("center", inplace=True)
-        texts = []
-        for x, y, label in zip(
-            geodata_copy.geometry.x,
-            geodata_copy.geometry.y,
-            geodata_copy['name'],
-        ):
-            if label == '[unknown]':
-                continue
-            texts.append(plt.text(
-                x,
-                y,
-                label,
+    geodata['center'] = geodata['geometry'].centroid
+    geodata_copy = geodata.copy()
+    geodata_copy.set_geometry("center", inplace=True)
+
+    if not func_render_region and label_field_key:
+        def func_render_region(centroid_x, centroid_y, region_data):
+            plt.text(
+                centroid_x,
+                centroid_y,
+                region_data[label_field_key],
                 fontsize=5,
                 horizontalalignment='center',
-            ))
 
-    BASE_FONT_SIZE = 16
+            )
 
-    def draw_text(x, y, text, p_font_size=1):
-        fig.text(
-            x=x,
-            y=y,
-            s=text,
-            fontsize=BASE_FONT_SIZE * p_font_size,
-            horizontalalignment='center',
-        )
+    for [centroid_x, centroid_y, region_data] in zip(
+        geodata_copy.geometry.x,
+        geodata_copy.geometry.y,
+        geodata_copy.to_dict('records'),
+    ):
+        func_render_region(centroid_x, centroid_y, region_data)
 
-    draw_text(0.5, 0.94, title, 1)
-    draw_text(0.5, 0.90, sub_title, 0.75)
-    draw_text(0.5, 0.06, footer_text, 0.5)
+    if not func_draw_on_figure:
+
+        def func_draw_on_figure(fig):
+
+            def draw_text(text_x, text_y, text, p_font_size=1):
+                fig.text(
+                    x=text_x,
+                    y=text_y,
+                    s=text,
+                    fontsize=BASE_FONT_SIZE * p_font_size,
+                    horizontalalignment='center',
+                )
+
+            draw_text(0.5, 0.94, title, 1)
+            draw_text(0.5, 0.90, sub_title, 0.75)
+            draw_text(0.5, 0.06, footer_text, 0.5)
+
+    func_draw_on_figure(fig)
 
     plt.axis('off')
     plt.show()
 
 
 if __name__ == '__main__':
-    import gig.attrs
-    entity_type = 'gnd'
-    region_geodata = get_region_geodata('LK', entity_type)
-    ethnicity_data = gig.attrs.get_table_data(
-        'census',
-        'ethnicity_of_population',
-        entity_type=entity_type,
-    )
-    region_to_color_map = {}
-    entity_ids = list(region_geodata['id'])
-    for entity_id in entity_ids:
-        if entity_id not in ethnicity_data:
-            color = 'black'
-        else:
-            d = ethnicity_data[entity_id]
-            sinhalese = d['sinhalese']
-            tamil = d['sri_lankan_tamil'] + d['indian_tamil']
-            moor = d['moor'] + d['malay']
-
-            total_population = d['total_population']
-            p_sinhalese = sinhalese / total_population
-
-            if sinhalese > total_population * 0.9:
-                color = 'red'
-            elif tamil > total_population * 0.9:
-                color = 'orange'
-            elif moor > total_population * 0.9:
-                color = 'green'
-            else:
-                color = 'gray'
-
-        region_to_color_map[entity_id] = color
-
-    region_geodata = get_region_geodata('LK', entity_type)
+    from geo import geodata
+    geodata = geodata.get_region_geodata('LK-11', 'dsd')
     plot_geodata(
-        region_geodata,
-        'Sri Lanka',
-        'With %s Boundaries' % entity_type,
-        'Source: http://www.statistics.gov.lk/',
-        region_to_color_map=region_to_color_map,
+        geodata,
+        title='Colombo District',
+        sub_title='DSD Boundaries',
+        footer_text='Data Source: http://www.statistics.gov.lk/',
+        label_field_key='hasc',
     )
-
-    # region_geodata = get_region_geodata('LK-11', 'dsd')
-    # plot_geodata(region_geodata, 'Colombo District with DSD Boundaries')
-
-    # region_geodata = get_region_geodata('LK-1127', 'gnd')
-    # plot_geodata(region_geodata, 'Thimbirigasyaya with GND Boundaries')
