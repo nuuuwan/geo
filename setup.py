@@ -1,7 +1,7 @@
 """Setup."""
 import setuptools
 DIST_NAME = 'geo'
-VERSION = 1
+VERSION = 2
 SUB_VERSION = 0
 
 with open("src/%s/README.md" % DIST_NAME, "r") as fh:

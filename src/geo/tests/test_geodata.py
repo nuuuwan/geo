@@ -41,5 +41,6 @@ class TestGeoData(unittest.TestCase):
                 'province': 'LK-1',
                 'district': 'LK-11',
                 'dsd': 'LK-1127',
+                'gnd': 'LK-1127015',
             },
         )
