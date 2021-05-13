@@ -88,6 +88,7 @@ def get_latlng_regions(lat_lng):
         ENTITY_TYPE.PROVINCE,
         ENTITY_TYPE.DISTRICT,
         ENTITY_TYPE.DSD,
+        ENTITY_TYPE.GND,
     ]:
         region_id = _get_latlng_region(lat_lng, region_type, parent_region_id)
         if not region_id:
