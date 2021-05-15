@@ -1,4 +1,7 @@
 DIST_NAME=geo
 
-pip uninstall -y https://test.pypi.org/simple/ $DIST_NAME-nuuuwan
-pip install -i https://test.pypi.org/simple/ $DIST_NAME-nuuuwan
+DIST_NAME=geo
+REPOSITORY=test.pypi
+# REPOSITORY=pypi
+
+pip install -i https://${REPOSITORY}.org/simple/ --upgrade --force-reinstall $DIST_NAME-nuuuwan
