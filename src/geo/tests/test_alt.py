@@ -17,3 +17,16 @@ class TestAltitude(unittest.TestCase):
                 alt.get_altitude([lat, lng]),
                 expected_altitude,
             )
+
+    def test_get_horizon(self):
+        """Test."""
+        for [obj_height, expected_horizon] in [
+            [0, 0],
+            [1, 3570.1541983505417],
+            [2, 5048.960685131149],
+            [100, 35701.680632709715],
+        ]:
+            self.assertEqual(
+                alt.get_horizon(obj_height),
+                expected_horizon,
+            )
