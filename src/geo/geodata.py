@@ -10,14 +10,14 @@ from utils.cache import cache
 
 from gig.ent_types import get_entity_type, ENTITY_TYPE
 
-CACHE_NAME = 'geo.20210513'
+CACHE_NAME = 'geo.20210523.1921'
 
 # pylint: disable=W0212
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
 def get_all_geodata(region_type):
-    """Get TopoJSON data for entire country by region type.
+    """Get Geo/TopoJSON data for entire country by region type.
 
     Args:
         region_type (str): Region Type ('province', 'district' etc)
@@ -26,17 +26,22 @@ def get_all_geodata(region_type):
         Geo-spatial data as GeoPandasFrame
 
     """
+
+    file_ext = 'topojson' \
+        if (region_type in [ENTITY_TYPE.GND]) \
+        else 'geojson'
+
     return geopandas.read_file(
         os.path.join(
             'https://raw.githubusercontent.com',
             'nuuuwan/geo-data/master',
-            '%s.json' % (region_type),
+            '%s.%s' % (region_type, file_ext),
         ),
     )
 
 
 def get_region_geodata(region_id, sub_region_type):
-    """Get TopoJSON data for a particular region, by sub_region_type.
+    """Get Geo/TopoJSON data for a particular region, by sub_region_type.
 
     Args:
         region_id (str): Region ID (e.g. LK-1, LK-23)
@@ -65,7 +70,7 @@ def _get_region_to_geo(region_type):
 
 @cache(CACHE_NAME)
 def get_region_geo(region_id):
-    """Get TopoJSON of a region.
+    """Get Geo/TopoJSON of a region.
 
     Args:
         region_id (str): Region ID (e.g. LK-1, LK-23)

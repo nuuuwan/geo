@@ -27,20 +27,31 @@ class TestGeoData(unittest.TestCase):
     def test_get_region_geo(self):
         """Test."""
         geo = geodata.get_region_geo('LK-11')
-        self.assertEqual(
-            geo['type'],
-            'MultiPolygon',
-        )
+        self.assertEqual(geo['type'], 'MultiPolygon')
 
     def test_get_latlng_region(self):
         """Test."""
-        latlng = [6.9157, 79.8636]
-        self.assertEqual(
-            geodata.get_latlng_regions(latlng),
-            {
-                'province': 'LK-1',
-                'district': 'LK-11',
-                'dsd': 'LK-1127',
-                'gnd': 'LK-1127015',
-            },
-        )
+        for [latlng, expected_regions] in [
+            [
+                [6.9157, 79.8636],
+                {
+                    'province': 'LK-1',
+                    'district': 'LK-11',
+                    'dsd': 'LK-1127',
+                    'gnd': 'LK-1127015',
+                },
+            ],
+            [
+                [9.6615, 80.0255],
+                {
+                    'province': 'LK-4',
+                    'district': 'LK-41',
+                    'dsd': 'LK-4136',
+                    'gnd': 'LK-4136080',
+                },
+            ],
+        ]:
+            self.assertEqual(
+                geodata.get_latlng_regions(latlng),
+                expected_regions,
+            )
