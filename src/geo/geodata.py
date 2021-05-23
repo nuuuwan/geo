@@ -4,13 +4,13 @@ import os
 import ssl
 import geopandas
 
-from shapely.geometry import mapping, Point, shape, Polygon
+from shapely.geometry import mapping, Point, shape
 
 from utils.cache import cache
 
 from gig.ent_types import get_entity_type, ENTITY_TYPE
 
-CACHE_NAME = 'geo.20210523.1921'
+CACHE_NAME = 'geo.20210523.1948'
 
 # pylint: disable=W0212
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -18,7 +18,6 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 def get_all_geodata(region_type):
     """Get Geo/TopoJSON data for entire country by region type.
-
     Args:
         region_type (str): Region Type ('province', 'district' etc)
 
@@ -27,10 +26,7 @@ def get_all_geodata(region_type):
 
     """
 
-    file_ext = 'topojson' \
-        if (region_type in [ENTITY_TYPE.GND]) \
-        else 'geojson'
-
+    file_ext = 'topojson'
     return geopandas.read_file(
         os.path.join(
             'https://raw.githubusercontent.com',
@@ -60,7 +56,6 @@ def _get_region_to_geo(region_type):
     """Get region to geo index."""
     geo_data = get_all_geodata(region_type)
     n_regions = len(geo_data['geometry'])
-    print(n_regions)
     region_to_geo = {}
     for i in range(0, n_regions):
         region_id = geo_data['id'][i]
@@ -96,21 +91,16 @@ def _get_latlng_region(lat_lng, region_type, parent_region_id=None):
             continue
         geo = region_to_geo[region_id]
 
-        polygon_or_multi_polygon = shape(geo)
-
-        if isinstance(polygon_or_multi_polygon, Polygon):
-            if polygon_or_multi_polygon.contains(point):
+        multi_polygon = shape(geo)
+        for polygon in multi_polygon:
+            if polygon.contains(point):
                 return region_id
-        else:
-            for polygon in polygon_or_multi_polygon:
-                if polygon.contains(point):
-                    return region_id
+
     return None
 
 
 def get_latlng_regions(lat_lng):
-    """Find the regions (province, district, dsd and gnd) which a given
-        location is located in.
+    """Find the regions which a given location is located in.
 
     Args:
         lat_lng (pair of floats): Latitude and Longitude as pair of floats

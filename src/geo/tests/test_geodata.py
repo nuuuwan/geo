@@ -1,5 +1,6 @@
 """Tests."""
-
+import time
+import random
 import unittest
 import geopandas
 from geo import geodata
@@ -55,3 +56,18 @@ class TestGeoData(unittest.TestCase):
                 geodata.get_latlng_regions(latlng),
                 expected_regions,
             )
+
+    def test_get_latlng_region_perf(self):
+        """Test."""
+        t_calls = []
+        n_calls = 10
+        for _ in range(0, n_calls):
+            latlng = [6 + random.random() * 3, 80.25 + 0.5 * random.random()]
+
+            t_start = time.time()
+            region = geodata.get_latlng_regions(latlng)
+            t_calls.append(time.time() - t_start)
+
+            self.assertTrue('province' in region, [latlng, region])
+
+        self.assertTrue(max(t_calls) < 0.1, t_calls)
