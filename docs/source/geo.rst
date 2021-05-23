@@ -4,6 +4,14 @@ geo package
 Submodules
 ----------
 
+geo.alt module
+--------------
+
+.. automodule:: geo.alt
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 geo.geodata module
 ------------------
 

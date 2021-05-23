@@ -16,19 +16,36 @@ CACHE_NAME = 'geo.20210513'
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
-def get_all_geodata(sub_region_type):
-    """Get geo data for entire country."""
+def get_all_geodata(region_type):
+    """Get TopoJSON data for entire country by region type.
+
+    Args:
+        region_type (str): Region Type ('province', 'district' etc)
+
+    Returns:
+        Geo-spatial data as GeoPandasFrame
+
+    """
     return geopandas.read_file(
         os.path.join(
             'https://raw.githubusercontent.com',
             'nuuuwan/geo-data/master',
-            '%s.json' % (sub_region_type),
+            '%s.json' % (region_type),
         ),
     )
 
 
 def get_region_geodata(region_id, sub_region_type):
-    """Get geo data for region."""
+    """Get TopoJSON data for a particular region, by sub_region_type.
+
+    Args:
+        region_id (str): Region ID (e.g. LK-1, LK-23)
+        region_type (str): Region Type ('province', 'district' etc)
+
+    Returns:
+        Geo-spatial data as GeoPandasFrame
+
+    """
     geodata = get_all_geodata(sub_region_type)
     return geodata[geodata['id'].str.slice(stop=len(region_id)) == region_id]
 
@@ -48,7 +65,15 @@ def _get_region_to_geo(region_type):
 
 @cache(CACHE_NAME)
 def get_region_geo(region_id):
-    """Get geo of region."""
+    """Get TopoJSON of a region.
+
+    Args:
+        region_id (str): Region ID (e.g. LK-1, LK-23)
+
+    Returns:
+        Geo-spatial data as GeoPandasFrame
+
+    """
     region_type = get_entity_type(region_id)
     region_to_geo = _get_region_to_geo(region_type)
     return region_to_geo.get(region_id, {})
@@ -81,6 +106,13 @@ def _get_latlng_region(lat_lng, region_type, parent_region_id=None):
 def get_latlng_regions(lat_lng):
     """Find the regions (province, district, dsd and gnd) which a given
         location is located in.
+
+    Args:
+        lat_lng (pair of floats): Latitude and Longitude as pair of floats
+
+    Returns:
+        Map of region type to region ID
+
     """
     region_map = {}
     parent_region_id = ''
