@@ -16,4 +16,4 @@ pip install geo-nuuuwan
 
 # Example Map Plots
 
-See [srcs/geo/examples](src/geo/examples).
+See [Examples on GitHub](https://github.com/nuuuwan/geo/tree/main/src/geo/examples).
