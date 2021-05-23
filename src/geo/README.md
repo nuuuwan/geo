@@ -5,15 +5,12 @@
 # Installing Geo
 
 ```bash
-pip install -i https://test.pypi.org/simple/ geo-nuuuwan
-```
-
-or
-
-```bash
 pip install geo-nuuuwan
 ```
 
-# Example Map Plots
+# Tutorial and Examples
 
-See [Examples on GitHub](https://github.com/nuuuwan/geo/tree/main/src/geo/examples).
+See [Plotting Maps of Sri Lanka with GeoPandas and MatPlotLib
+](https://medium.com/on-technology/plotting-maps-of-sri-lanka-with-geopandas-and-matplotlib-377d50e3f0f) for a Tutorial on using this library.
+
+See [GitHub](https://github.com/nuuuwan/geo/tree/main/src/geo/examples) for example code.

@@ -16,6 +16,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/nuuuwan/%s" % DIST_NAME,
+
     project_urls={
         "Bug Tracker": "https://github.com/nuuuwan/%s/issues" % DIST_NAME,
     },
