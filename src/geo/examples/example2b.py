@@ -27,4 +27,6 @@ gpd_df.plot(
     figsize=(7, 9),
 )
 plt.title('Population Density of Sri Lanka by DSD')
+
+plt.savefig('%s.png' % __file__)
 plt.show()
