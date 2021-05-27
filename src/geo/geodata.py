@@ -10,7 +10,7 @@ from utils.cache import cache
 
 from gig.ent_types import get_entity_type, ENTITY_TYPE
 
-CACHE_NAME = 'geo.20210527.1919'
+CACHE_NAME = 'geo.20210527.1930'
 
 # pylint: disable=W0212
 ssl._create_default_https_context = ssl._create_unverified_context
