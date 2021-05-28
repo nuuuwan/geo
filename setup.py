@@ -2,7 +2,7 @@
 import setuptools
 DIST_NAME = 'geo'
 VERSION = 3
-SUB_VERSION = 5
+SUB_VERSION = 7
 
 with open("src/%s/README.md" % DIST_NAME, "r") as fh:
     long_description = fh.read()
@@ -28,6 +28,11 @@ setuptools.setup(
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.6",
+
+    install_requires=[
+        'utils-nuuuwan',
+        'gig-nuuuwan',
+    ],
     test_suite='nose.collector',
     tests_require=['nose'],
 )
