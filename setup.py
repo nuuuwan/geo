@@ -2,7 +2,7 @@
 import setuptools
 DIST_NAME = 'geo'
 VERSION = 3
-SUB_VERSION = 7
+SUB_VERSION = 8
 
 with open("src/%s/README.md" % DIST_NAME, "r") as fh:
     long_description = fh.read()
