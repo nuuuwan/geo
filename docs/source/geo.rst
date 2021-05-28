@@ -20,14 +20,6 @@ geo.geodata module
    :undoc-members:
    :show-inheritance:
 
-geo.plot module
----------------
-
-.. automodule:: geo.plot
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Module contents
 ---------------
 
