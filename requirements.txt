@@ -1,0 +1,4 @@
+geopandas
+shapely
+utils-nuuuwan
+gig-nuuuwan
