@@ -38,7 +38,6 @@ class TestAltitude(unittest.TestCase):
                 expected_horizon,
             )
 
-
     def test_get_observed_height_info(self):
         """Test."""
         self.assertEqual(

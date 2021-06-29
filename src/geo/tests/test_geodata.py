@@ -1,6 +1,6 @@
 """Tests."""
-import time
 import random
+import time
 import unittest
 import geopandas
 from geo import geodata
@@ -71,3 +71,7 @@ class TestGeoData(unittest.TestCase):
             self.assertTrue('province' in region, [latlng, region])
 
         self.assertTrue(max(t_calls) < 0.1, t_calls)
+
+
+if __name__ == '__main__':
+    unittest.main()
