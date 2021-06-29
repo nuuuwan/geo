@@ -6,16 +6,18 @@ import geopandas
 
 from shapely.geometry import mapping, Point, shape
 
+from utils.timex import SECONDS_IN
 from utils.cache import cache
 
 from gig.ent_types import get_entity_type, ENTITY_TYPE
 
-CACHE_NAME = 'geo.20210527.1930'
+CACHE_NAME = 'geo'
 
 # pylint: disable=W0212
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
+@cache(CACHE_NAME, SECONDS_IN.YEAR)
 def get_all_geodata(region_type):
     """Get Geo/TopoJSON data for entire country by region type.
     Args:
@@ -36,6 +38,7 @@ def get_all_geodata(region_type):
     )
 
 
+@cache(CACHE_NAME, SECONDS_IN.YEAR)
 def get_region_geodata(region_id, sub_region_type):
     """Get Geo/TopoJSON data for a particular region, by sub_region_type.
 
@@ -51,7 +54,7 @@ def get_region_geodata(region_id, sub_region_type):
     return geodata[geodata['id'].str.slice(stop=len(region_id)) == region_id]
 
 
-@cache(CACHE_NAME)
+@cache(CACHE_NAME, SECONDS_IN.YEAR)
 def _get_region_to_geo(region_type):
     """Get region to geo index."""
     geo_data = get_all_geodata(region_type)
@@ -63,7 +66,7 @@ def _get_region_to_geo(region_type):
     return region_to_geo
 
 
-@cache(CACHE_NAME)
+@cache(CACHE_NAME, SECONDS_IN.YEAR)
 def get_region_geo(region_id):
     """Get Geo/TopoJSON of a region.
 
@@ -79,7 +82,7 @@ def get_region_geo(region_id):
     return region_to_geo.get(region_id, {})
 
 
-@cache(CACHE_NAME)
+@cache(CACHE_NAME, SECONDS_IN.YEAR)
 def _get_latlng_region(lat_lng, region_type, parent_region_id=None):
     """Find the region which a given location is located in."""
     lat, lng = lat_lng
@@ -99,6 +102,7 @@ def _get_latlng_region(lat_lng, region_type, parent_region_id=None):
     return None
 
 
+@cache(CACHE_NAME, SECONDS_IN.YEAR)
 def get_latlng_regions(lat_lng):
     """Find the regions which a given location is located in.
 
