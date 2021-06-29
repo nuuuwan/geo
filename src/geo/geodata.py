@@ -51,6 +51,8 @@ def get_region_geodata(region_id, sub_region_type):
 
     """
     geodata = get_all_geodata(sub_region_type)
+    if region_id == 'LK':
+        return geodata
     return geodata[geodata['id'].str.slice(stop=len(region_id)) == region_id]
 
 

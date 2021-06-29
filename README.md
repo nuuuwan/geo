@@ -17,6 +17,10 @@ See [GitHub](https://github.com/nuuuwan/geo/tree/main/src/geo/examples) for exam
 
 # Release History
 
+## 1.0.3
+
+* Fixed bug with accessing ED/PD data
+
 ## 1.0.2
 
 * Added caching

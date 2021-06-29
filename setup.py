@@ -3,8 +3,8 @@ import time
 import setuptools
 DIST_NAME = 'geo'
 
-IS_PRE_RELEASE = False
-MAJOR, MINOR, PATCH = 1, 0, 2
+IS_PRE_RELEASE = True
+MAJOR, MINOR, PATCH = 1, 0, 3
 if IS_PRE_RELEASE:
     PRE_RELEASE_LABEL = '%d' % (time.time())
     version = '%d.%d.%drc%s' % (MAJOR, MINOR, PATCH, PRE_RELEASE_LABEL)
