@@ -11,7 +11,7 @@ if IS_PRE_RELEASE:
 else:
     version = '%d.%d.%d' % (MAJOR, MINOR, PATCH)
 
-with open("src/%s/README.md" % DIST_NAME, "r") as fh:
+with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
