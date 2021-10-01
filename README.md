@@ -24,3 +24,4 @@ See [GitHub](https://github.com/nuuuwan/geo/tree/main/src/geo/examples) for exam
 ## 1.0.2
 
 * Added caching
+  *  [2021-10-01 04:29PM] Plots
