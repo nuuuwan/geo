@@ -1,6 +1,7 @@
 """Tests."""
 
 import unittest
+
 from geo import alt
 
 LAT_LNG_320 = 6.9189, 79.8592
@@ -12,7 +13,7 @@ ALT_SRI_PADA = 2161
 
 
 class TestAltitude(unittest.TestCase):
-    """Tests."""''
+    """Tests.""" ''
 
     def test_get_altitude(self):
         """Test."""
@@ -49,7 +50,7 @@ class TestAltitude(unittest.TestCase):
             ),
             {
                 'base_height': 101.87622235835856,
-                'd_sub_to_obj_km':  71.73658496419974,
+                'd_sub_to_obj_km': 71.73658496419974,
                 'obj_height': 2161,
                 'observed_height': 2059.1237776416415,
                 'alpha_deg': 99.68857445825606,
@@ -66,7 +67,7 @@ class TestAltitude(unittest.TestCase):
             ),
             {
                 'base_height': 337.980254238245,
-                'd_sub_to_obj_km':  101.33624713939635,
+                'd_sub_to_obj_km': 101.33624713939635,
                 'obj_height': 2504,
                 'observed_height': 2166.019745761755,
                 'alpha_deg': 84.88017934540761,

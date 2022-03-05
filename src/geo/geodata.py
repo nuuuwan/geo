@@ -2,14 +2,12 @@
 
 import os
 import ssl
+
 import geopandas
-
-from shapely.geometry import mapping, Point, shape
-
-from utils.timex import SECONDS_IN
+from gig.ent_types import ENTITY_TYPE, get_entity_type
+from shapely.geometry import Point, mapping, shape
 from utils.cache import cache
-
-from gig.ent_types import get_entity_type, ENTITY_TYPE
+from utils.timex import SECONDS_IN
 
 CACHE_NAME = 'geo'
 

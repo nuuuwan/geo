@@ -1,10 +1,11 @@
 """Utils for altutude information."""
-import os
 import math
+import os
 
 from utils import www
 from utils.cache import cache
-from utils.geo import EARTH_RADIUS as EARTH_RADIUS_KM, get_distance
+from utils.geo import EARTH_RADIUS as EARTH_RADIUS_KM
+from utils.geo import get_distance
 
 DIM = 1201
 CACHE_NAME = 'geo.alt'

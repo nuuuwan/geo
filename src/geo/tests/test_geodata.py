@@ -2,28 +2,34 @@
 import random
 import time
 import unittest
+
 import geopandas
+
 from geo import geodata
 
 
 class TestGeoData(unittest.TestCase):
-    """Tests."""''
+    """Tests.""" ''
 
     def test_get_all_geodata(self):
         """Test."""
         geo_data = geodata.get_all_geodata('province')
-        self.assertTrue(isinstance(
-            geo_data,
-            geopandas.geodataframe.GeoDataFrame,
-        ))
+        self.assertTrue(
+            isinstance(
+                geo_data,
+                geopandas.geodataframe.GeoDataFrame,
+            )
+        )
 
     def test_get_region_geodata(self):
         """Test."""
         geo_data = geodata.get_region_geodata('LK', 'province')
-        self.assertTrue(isinstance(
-            geo_data,
-            geopandas.geodataframe.GeoDataFrame,
-        ))
+        self.assertTrue(
+            isinstance(
+                geo_data,
+                geopandas.geodataframe.GeoDataFrame,
+            )
+        )
 
     def test_get_region_geo(self):
         """Test."""

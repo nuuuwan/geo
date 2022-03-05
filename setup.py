@@ -1,6 +1,8 @@
 """Setup."""
 import time
+
 import setuptools
+
 DIST_NAME = 'geo'
 
 IS_PRE_RELEASE = False
@@ -23,7 +25,6 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/nuuuwan/%s" % DIST_NAME,
-
     project_urls={
         "Bug Tracker": "https://github.com/nuuuwan/%s/issues" % DIST_NAME,
     },
@@ -35,7 +36,6 @@ setuptools.setup(
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.6",
-
     install_requires=[
         'geopandas',
         'shapely',

@@ -1,5 +1,6 @@
 """Example."""
 import matplotlib.pyplot as plt
+
 from geo import geodata
 
 gpd_df = geodata.get_region_geodata('LK-2', 'dsd')
@@ -8,7 +9,6 @@ gpd_df['density'] = gpd_df['population'] / gpd_df['area']
 
 gpd_df.plot(
     column='density',
-
     scheme='UserDefined',
     classification_kwds={
         'bins': [100, 200, 400, 800],
