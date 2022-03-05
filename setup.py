@@ -1,27 +1,20 @@
 """Setup."""
-import time
 
 import setuptools
 
 DIST_NAME = 'geo'
-
-IS_PRE_RELEASE = False
 MAJOR, MINOR, PATCH = 1, 0, 3
-if IS_PRE_RELEASE:
-    PRE_RELEASE_LABEL = '%d' % (time.time())
-    version = '%d.%d.%drc%s' % (MAJOR, MINOR, PATCH, PRE_RELEASE_LABEL)
-else:
-    version = '%d.%d.%d' % (MAJOR, MINOR, PATCH)
+VERSION = '%d.%d.%d' % (MAJOR, MINOR, PATCH)
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="%s-nuuuwan" % DIST_NAME,
-    version=version,
+    version=VERSION,
     author="Nuwan I. Senaratna",
     author_email="nuuuwan@gmail.com",
-    description="Generalized information graph.",
+    description="Geographic Utilities.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/nuuuwan/%s" % DIST_NAME,
