@@ -17,13 +17,12 @@ See [GitHub](https://github.com/nuuuwan/geo/tree/main/src/geo/examples) for exam
 
 # Release History
 
-## 1.0.3
+## 1.0.4 (NOT RELEASED)
+
+## 1.0.3 (LATEST RELEASE - https://pypi.org/project/geo-nuuuwan/#history)
 
 * Fixed bug with accessing ED/PD data
 
 ## 1.0.2
 
 * Added caching
-  *  [2021-10-01 04:29PM] Plots
-  *  [2021-10-01 04:52PM] Plots
-  *  [2021-10-18 08:55AM] Readme
