@@ -14,7 +14,7 @@ setuptools.setup(
     version=VERSION,
     author="Nuwan I. Senaratna",
     author_email="nuuuwan@gmail.com",
-    description="Geographic Utilities.",
+    description="Python library for drawing maps of Sri Lanka.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/nuuuwan/%s" % DIST_NAME,
