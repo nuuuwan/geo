@@ -17,9 +17,13 @@ See [GitHub](https://github.com/nuuuwan/geo/tree/main/src/geo/examples) for exam
 
 # Release History
 
-## 1.0.4 (NOT RELEASED)
+## 1.0.5 (NEXT RELEASE)
 
-## 1.0.3 (LATEST RELEASE - https://pypi.org/project/geo-nuuuwan/#history)
+## 1.0.4 (LATEST RELEASE)
+
+* Fixed #BUG caused by repos using main, not master
+
+## 1.0.3
 
 * Fixed bug with accessing ED/PD data
 
