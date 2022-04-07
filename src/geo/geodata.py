@@ -30,7 +30,7 @@ def get_all_geodata(region_type):
     return geopandas.read_file(
         os.path.join(
             'https://raw.githubusercontent.com',
-            'nuuuwan/geo-data/master',
+            'nuuuwan/geo-data/main',
             '%s.%s' % (region_type, file_ext),
         ),
     )

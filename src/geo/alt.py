@@ -18,7 +18,7 @@ def _load_altitude_data(min_lat_lng):
 
     url = os.path.join(
         'https://raw.githubusercontent.com/nuuuwan',
-        'geo_data_altitude/master',
+        'geo_data_altitude/main',
         '%02d.%02d.json' % (min_lat, min_lng),
     )
     data = www.read_json(url)
