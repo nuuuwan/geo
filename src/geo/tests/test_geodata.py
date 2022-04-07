@@ -76,7 +76,7 @@ class TestGeoData(unittest.TestCase):
 
             self.assertTrue('province' in region, [latlng, region])
 
-        self.assertTrue(max(t_calls) < 0.1, t_calls)
+        self.assertTrue(max(t_calls) < 2, t_calls)
 
 
 if __name__ == '__main__':
