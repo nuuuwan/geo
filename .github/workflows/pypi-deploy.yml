@@ -1,6 +1,9 @@
-name: Deploy to PyPI
+name: Deploy to PyPI (On New Tag)
 
-on: workflow_dispatch
+on:
+  push:
+    tags:
+       - '*'
 
 jobs:
   deploy:
