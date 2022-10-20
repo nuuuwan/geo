@@ -46,7 +46,10 @@ def render_district(district):
     n_islands = 0
     for i, polygon in enumerate(list(multipolygon)):
         area_est = polygon.area * AREA_FACTOR
-        centroid = (round(polygon.centroid.y, 6), round(polygon.centroid.x, 6))
+        centroid = (
+            round(polygon.centroid.y, 6),
+            round(polygon.centroid.x, 6),
+        )
         area = None
         if MIN_AREA <= area_est <= MAX_AREA:
             info = CENTROID_TO_INFO.get(centroid, 'Unknown')
@@ -58,9 +61,11 @@ def render_district(district):
 
             if name == 'Unknown':
                 print(centroid, ': \'Unknown\',')
-                os.system('open -a firefox ' +
-                          '"https://www.google.com/maps/search/%f+%f"' %
-                          (centroid[0], centroid[1]))
+                os.system(
+                    'open -a firefox '
+                    + '"https://www.google.com/maps/search/%f+%f"'
+                    % (centroid[0], centroid[1])
+                )
 
             if name != NOT_AN_ISLAND:
                 d['id'].append(i)

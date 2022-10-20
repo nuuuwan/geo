@@ -40,12 +40,14 @@ def get_altitude(lat_lng):
 
 def get_horizon(sub_height):
     """Get horizon distance."""
-    return math.sqrt(2 * EARTH_RADIUS_KM * 1000 * sub_height + sub_height ** 2)
+    return math.sqrt(
+        2 * EARTH_RADIUS_KM * 1000 * sub_height + sub_height**2
+    )
 
 
 def _get_sub_height_from_horizon(horizon):
     """Get subject height from horizon."""
-    return (horizon ** 2) / (2 * EARTH_RADIUS_KM * 1000)
+    return (horizon**2) / (2 * EARTH_RADIUS_KM * 1000)
 
 
 def get_observed_height_info(
