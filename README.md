@@ -17,9 +17,13 @@ See [GitHub](https://github.com/nuuuwan/geo/tree/main/src/geo/examples) for exam
 
 # Release History
 
-## 1.0.5 (NEXT RELEASE)
+## 1.0.6 (NEXT RELEASE)
 
-## 1.0.4 (LATEST RELEASE)
+## 1.0.5 (LATEST RELEASE)
+
+* HACK: Removed caching from geodata
+
+## 1.0.4
 
 * Fixed #BUG caused by repos using main, not master
 
